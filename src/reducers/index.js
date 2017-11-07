@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux'
-import { REQUEST_TODOS, RECEIVE_TODOS, RECEIVE_TODO_SINGLE, DELETED_TODO_SINGLE } from '../actions'
+import { 
+    REQUEST_TODOS, 
+    RECEIVE_TODOS, 
+    RECEIVE_TODO_SINGLE, 
+    DELETED_TODO_SINGLE,
+    EDITED_TODO 
+} from '../actions'
 
 const initialState = {
     isFetching: false,
@@ -33,6 +39,16 @@ const todosWrapper = (state = initialState, action) => {
             return Object.assign({}, state, {
                 todos: state.todos.filter((t) => t.id !== action.id)
             })    
+
+        case EDITED_TODO: 
+
+            let todos = Object.assign([], state.todos).map((t) => {
+
+                return t.id === action.id ? 
+                    Object.assign({},t,{ text: action.text }) :
+                    t
+            })
+            return Object.assign({}, state, { todos })
 
         default:
             return state;

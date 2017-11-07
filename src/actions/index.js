@@ -5,6 +5,7 @@ export const RECEIVE_TODOS = 'RECEIVE_TODOS'
 export const RECEIVE_TODO_SINGLE = 'RECEIVE_TODO_SINGLE'
 export const ADD_NEW_TODO = 'ADD_NEW_TODO'
 export const DELETED_TODO_SINGLE = 'DELETED_TODO_SINGLE'
+export const EDITED_TODO = 'EDIT_TODO'
 
 const requestTodos = () => {
     return {
@@ -37,6 +38,14 @@ const deletedTodo = (id) => {
     return {
         type: DELETED_TODO_SINGLE,
         id
+    }
+}
+
+const changeTodo = (id, text) => {
+    return {
+        type: EDITED_TODO,
+        id,
+        text
     }
 }
 
@@ -90,5 +99,16 @@ export const deleteTodo = (id) => {
         let refToDelete = fire.database().ref('/todos/'+id)
         refToDelete.remove()
         dispatch(deletedTodo(id))
+    }
+}
+
+export const editTodo = (id, newText) => {
+
+    return (dispatch) => {
+
+        let refToChange = fire.database().ref('/todos/'+id)
+        refToChange.child('text').set(newText)
+
+        dispatch(changeTodo(id, newText))
     }
 }
