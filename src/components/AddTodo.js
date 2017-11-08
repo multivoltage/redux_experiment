@@ -5,10 +5,20 @@ import { insertNewTodo } from '../actions'
 class AddTodo extends Component {
   
   render(){
-        
-    const { insertNewTodo } = this.props
 
-    return <button onClick={() => { insertNewTodo('this is a new todo') }}>ADD TODO</button>
+    return (
+      <div>
+        <input ref="tv" type="text" placeholder="become rich" />
+        <button onClick={this.handleClick.bind(this)}>ADD TODO</button>      
+      </div>
+    )
+  }
+
+  handleClick(){
+
+    const { insertNewTodo } = this.props
+    insertNewTodo(this.refs.tv.value)
+    this.refs.tv.value = '';
   }
 }
 
