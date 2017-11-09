@@ -7,6 +7,7 @@ import { fetchTodos, fetchTodosOneToOne, insertNewTodo } from './actions'
 
 import TodoList from './components/TodoList'
 import AddTodo from './components/AddTodo'
+import ReactJson from 'react-json-view'
 
 class App extends Component {
 
@@ -28,10 +29,23 @@ class App extends Component {
 
     return (
       <div className="App">
-        <AddTodo />
+        <AddTodo className="addTodo"/>
         <TodoList todos={this.props.todos}/>
+        {this.renderDebug()}
       </div>
     );
+  }
+
+  renderDebug(){
+    const style = {
+      with: '500px',
+    }
+    return (
+      <div className="debug">
+        <p>props</p>
+          <ReactJson src={this.props} />
+      </div>
+    )
   }
 }
 

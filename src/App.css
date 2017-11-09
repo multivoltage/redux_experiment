@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .App-logo {
@@ -25,4 +27,16 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.addTodo {
+  width: 100%;
+}
+.debug {
+  text-align: left;
+  font-size: 10px;
+}
+
+ul {
+  list-style: none;
 }
