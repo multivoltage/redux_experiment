@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
+
+// on each component we import only actions that we need to fire
 import { fetchTodos, fetchTodosOneToOne, insertNewTodo } from './actions'
+
 import TodoList from './components/TodoList'
 import AddTodo from './components/AddTodo'
 
@@ -12,6 +14,9 @@ class App extends Component {
     super(props)
   }
 
+  /**
+   * this is the perfect method where put some async operation, like fetchTodosOneToOne()
+   */
   componentDidMount(){
     const { dispatch } = this.props
     dispatch(fetchTodosOneToOne())
@@ -30,6 +35,12 @@ class App extends Component {
   }
 }
 
+/**
+ * Inside App component we' ll find default props passed by parent but
+ * also todos. So we can use this.props.todos 
+ * So we never user App like <App todos={some_array} /> because connect()
+ * insert some_array in this.props
+ */
 const mapStateToProps = (state) => {
 
   const { todos } = state.todosWrapper
@@ -38,4 +49,9 @@ const mapStateToProps = (state) => {
   }
 }
 
+/**
+ * connect() is a react-redux helpers that allow us to export a components
+ * (App in this case) with interested fields in components' props.
+ * This work thanks mapStateToProps function
+ */
 export default connect(mapStateToProps)(App);

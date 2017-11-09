@@ -1,3 +1,11 @@
+# What is it
+
+I spent a lot of time to undestand how redux works and also much time to undestand hot to integrate firebase in a react app. This repo is a simple todo list which use both firebase and redux. I setup these "watcher":
+- child_added - which help me to build initial list and add new insert on database
+- child_changed - which help to watch when someone edit an existing todo
+- child_removed - which help me to watch when someone delete an existing todo
+- push() - native firebase method to store new todo
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

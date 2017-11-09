@@ -1,3 +1,8 @@
+/**
+ * we export firebase as variable so we can use fire object which is already inizialized
+ * storageBucket and messagingSenderId are empty becase we don' t need for this project
+ */
+
 import firebase from 'firebase'
 
 var config = {

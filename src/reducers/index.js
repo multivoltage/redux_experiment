@@ -45,9 +45,10 @@ const todosWrapper = (state = initialState, action) => {
             let todos = Object.assign([], state.todos).map((t) => {
 
                 return t.id === action.id ? 
-                    Object.assign({},t,{ text: action.text }) :
+                    Object.assign({},t,action.todo) :
                     t
             })
+
             return Object.assign({}, state, { todos })
 
         default:
@@ -55,6 +56,7 @@ const todosWrapper = (state = initialState, action) => {
     }
 }
 
+// rootReducers is a normal reducers build with list of reducers
 const rootReducers = combineReducers({
     todosWrapper
 })

@@ -41,11 +41,11 @@ const deletedTodo = (id) => {
     }
 }
 
-const changeTodo = (id, text) => {
+const changedTodo = (id, todo) => {
     return {
         type: EDITED_TODO,
         id,
-        text
+        todo
     }
 }
 
@@ -61,6 +61,10 @@ export const fetchTodosOneToOne = () => {
             fire.database().ref('/todos/').on('child_removed',(snapshot) => {
                 dispatch(deletedTodo(snapshot.val().id))
             })
+
+            fire.database().ref('/todos/').on('child_changed',(snapshot) => {
+                 dispatch(changedTodo(snapshot.key, snapshot.val()))
+            });
         }
     }
 
@@ -70,6 +74,7 @@ export const fetchTodos = () => {
         dispatch(requestTodos())
         
         fire.database().ref('/todos/').once('value').then((snapshot) => {
+            debugger
             let todos = Object.values(snapshot.val())
             dispatch(receiveTodos(todos))
         })
@@ -108,7 +113,5 @@ export const editTodo = (id, newText) => {
 
         let refToChange = fire.database().ref('/todos/'+id)
         refToChange.child('text').set(newText)
-
-        dispatch(changeTodo(id, newText))
     }
 }
